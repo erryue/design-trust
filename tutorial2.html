@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial2</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <header class="text-center mb-4">
+            <h1>Tutorial</h1>
+        </header>
+        <main>
+            <div class="bg-white px-5 rounded"> 
+                <div class="bg-light p-5 rounded">
+                    <h5 class="text-left">Task 2 overview&nbsp; <span style="font-size: 0.95em;">任务二概述</span></h5>
+                    <p></p>
+                    <p>In this task, you need to design a color scheme for a specified UI template. Your goal is to create a visually appealing and functional color palette.</p>
+                    <p>在这个任务中，您需要为指定的 UI 模板设计配色。您的目标是设计一个既美观又实用的配色方案。</p>
+                    <!-- <h5 class="text-left">Example</h5> -->
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="bg-white pt-4 px-5 rounded" >
+                <div class="bg-light p-5 rounded">
+                    <h5 class="text-left">UIHue introduction &nbsp;系统介绍</h5>
+                    <br>
+                    <p>UIHue is an AI-powered system for designing UI color schemes. Each session, UIHue provides four color scheme options along with color values, and you can generate results up to four times. 
+                        In addition to completing the design task, you will need to rate each set of generated color schemes.</p>
+                    <p>UIHue 是一个 AI 驱动的 UI 配色设计系统。 UIHue每次会提供四个配色设计方案并给出色值，允许最多生成四次。除完成设计任务外，您还需要对每组生成的配色方案打分。</p>
+                    <p>The following image illustrates a detailed example of the results generation by the UIHue system. </p>
+                    <p>下图详细展示了UIHue系统生成结果的示例。</p>
+                    <br>
+                    <div class="bg-light rounded">
+                        <img src="example2.jpeg" class="img-fluid w-100" alt="...">
+                    </div>
+                    <br>
+                    <br>
+                    <p class="card-text text-left mb-2">If you have any questions, feel free contact our experimenter!</p>
+                    <p>如果您有任何问题，请随时联系主试！</p>
+                </div>                
+            </div>
+             
+            <div class="bg-white p-5 rounded">
+                <div class="btn-group btn-group-toggle hidden" data-toggle="buttons">
+                    <label class="btn btn-outline-secondary active">
+                        <input type="radio" name="qualityOptions" id="highQuality" value="high" autocomplete="off" checked> High Quality
+                    </label>
+                    <label class="btn btn-outline-secondary">
+                        <input type="radio" name="qualityOptions" id="lowQuality" value="low" autocomplete="off"> Low Quality
+                    </label>
+                    <label class="btn btn-outline-secondary">
+                        <input type="radio" name="qualityOptions" id="mixedQuality" value="mixed" autocomplete="off"> Mixed Quality
+                    </label>
+                </div>
+                <div class="btn-group btn-group-toggle hidden" data-toggle="buttons">
+                    <label class="btn btn-outline-secondary active">
+                        <input type="radio" name="diversityOptions" id="highDiversity" value="high" autocomplete="off" checked> High Diversity
+                    </label>
+                    <label class="btn btn-outline-secondary">
+                        <input type="radio" name="diversityOptions" id="lowDiversity" value="low" autocomplete="off"> Low Diversity
+                    </label>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" onclick="location.href='Task2.html'">Start Task 2 &nbsp;开始任务二</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function getRandomValue(arr) {
+                const randomIndex = Math.floor(Math.random() * arr.length);
+                return arr[randomIndex];
+            }
+            
+            const qualityOptions = ['high', 'low', 'mixed'];
+            const diversityOptions = ['high', 'low'];
+
+            // Randomly select quality and diversity
+            const quality = getRandomValue(qualityOptions);
+            const diversity = getRandomValue(diversityOptions);
+
+
+            const startButton = document.querySelector('.btn-primary');
+            startButton.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                
+                // const quality = document.querySelector('input[name="qualityOptions"]:checked').value;
+                // const diversity = document.querySelector('input[name="diversityOptions"]:checked').value;
+                
+                const baseUrl = 'Task2.html';
+                const queryParams = `?quality=${encodeURIComponent(quality)}&diversity=${encodeURIComponent(diversity)}`;
+                const finalUrl = baseUrl + queryParams;
+                
+                window.location.href = finalUrl;
+            });
+        });
+    </script>
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+</body>
+</html>

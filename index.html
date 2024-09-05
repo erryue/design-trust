@@ -3,25 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Dataview Query Builder</title>
+    <title>Consent</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .btn-disabled {
+            pointer-events: none;
+            opacity: 0.65;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <header class="text-center mb-4">
-            <h1>Basic <span class="text-primary">Dataview</span> Query Builder</h1>
+            <h1 class="text-center">Informed consent</h1>
         </header>
         <main>
-            <div class="bg-light p-5 rounded">
-                <h2 class="text-center">WELCOME TO THE BASIC DATAVIEW QUERY BUILDER!</h2>
-                <p>The Basic Dataview Query Builder will guide you through some questions and put together a dataview query based on your answers. You can use this query as-is in your vault or as a starting point to refine a more advanced query.</p>
-                <p>The goal is to help you on your first dataview queries and to give you a better understanding of the syntax and needed information to build dataview queries from scratch.</p>
-                <p>Click the button to start!</p>
-                <div class="text-center">
-                    <button class="btn btn-primary" onclick="location.href='AIsystem.html'">START!</button>
+            <div class="bg-white px-5 rounded">
+                <div class="bg-light p-5 rounded">
+                    <h5>Welcome to the AI assist design experiments!</h5>
+                    <p> 欢迎参加人工智能辅助设计实验！</p>
+                    <br>
+                    <h5 class="text-left mb-3">Description&nbsp; <span style="font-size: 0.95em;">实验描述</span></h5>
+                    <p>The experiment studies the the effects of quality and diversity of AI results during creative design process. 
+                        The experiment includes two design tasks, which will be completed separately with the assistance of the Carvizio and UIHue systems. 
+                        Each task consists of four parts: a tutorial, a formal task, a questionnaire, and an interview.</p>
+                    <p>本实验旨在研究人工智能辅助设计结果的质量和多样性对设计过程的影响。本实验包含两个设计任务，将在Carvizio和UIHue系统的辅助下分别完成。
+                        每个任务包含四个部分：教程，正式任务，问卷和访谈。</p> 
+                    <br> 
+                    <h5 class="text-left mb-3">Time and payments&nbsp; <span style="font-size: 0.95em;">时间与报酬</span></h5>
+                    <p>Approximately 1 hour, 60 RMB allowances after study. </p>
+                    <p>实验时间约为1小时, 完成实验后将获得60元报酬。</p>
+                    <br> 
+                    <h5 class="text-left mb-3">Participant's rights&nbsp; <span style="font-size: 0.95em;">参与者权利</span></h5>
+                    <p>You may ask any study-related questions before and during the study. 
+                        You may take breaks as needed and stop your participation at any time. You have the right to refuse to answer questions. 
+                        The results of this study may be published in academic journals/conferences/books. 
+                        However, your name or other identifiers will not be used without your specific permission. </p>
+                    <p>在实验过程中有任何问题都可以直接提出，可以根据需要进行休息调整，在感觉研究内容不适等情况下允许随时终止实验。
+                        如果问题涉及到相关隐私可以拒绝回答。本研究的结果可能会在学术期刊/会议/书籍上发表，在不征得本人同意的情况下不会出现姓名或其他可以确认身份的信息。</p>
+                    <p></p>
+                    <br> 
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="toggleButton()">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            I have read the description of the study and of my rights as a participant. I voluntarily agree to participate in the study. 
+                        </label>
+                    </div>
+                    <p style="margin-top: 0.5rem; text-indent: 1em;">我已经阅读了研究的描述和我作为参与者的权利。我自愿参加此次实验。</p>
+                    <br> 
+                    <div class="text-center">
+                        <button id="confirmButton" class="btn btn-secondary btn-disabled" onclick="location.href='tutorial1.html'" disabled>Enter &nbsp;确认</button>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <script>
+        function toggleButton() {
+            var checkbox = document.getElementById('flexCheckDefault');
+            var button = document.getElementById('confirmButton');
+            if (checkbox.checked) {
+                button.classList.remove('btn-secondary', 'btn-disabled');
+                button.classList.add('btn-primary');
+                button.disabled = false;
+            } else {
+                button.classList.remove('btn-primary');
+                button.classList.add('btn-secondary', 'btn-disabled');
+                button.disabled = true;
+            }
+        }
+    </script>
+
 </body>
 </html>

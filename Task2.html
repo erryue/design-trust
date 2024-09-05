@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task2</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .figure, #ImagesButton2, #ImagesButton3, #ImagesButton4 {
+            display: none;
+        }
+        .figure-caption-hidden {
+            display: none;
+        }
+        .figure {
+            margin-bottom: 0;
+        }
+        .countdown-timer {
+            font-size: 1.25rem;
+            margin-left: 1rem;
+            color: gray; /* Adjust the color as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <header class="text-center">
+            <h1>Task 2</h1>
+            <div id="countdown" class="countdown-timer">
+                Countdown: <span id="timer"></span>
+            </div>
+        </header>
+        <main>
+            <div class="bg-white p-5 rounded"> 
+                <div class="bg-light p-5 rounded">
+                    <h5 class="card-title text-left mb-4">Design task&nbsp; <span style="font-size: 0.95em;">设计任务</span></h5>
+                    <p class="card-text text-left mb-2">Design a visually appealing and functional color palette for the specified UI template within 20 minutes. UIHue system below could design color schemes to assist your design. </p>
+                    <p class="card-text text-left">为指定的 UI 模板设计一个美观实用的配色方案。UIHue系统可以生成配色方案以辅助您的设计。</p>
+                    <p class="card-text text-left mb-2">Complete your sketches on the iPad.</p>
+                    <p class="card-text text-left">在iPad画板上完成您的草图。</p>
+                </div>
+                <br>
+                <br>
+                <div class="bg-light pt-5 pb-4 px-5 rounded">
+                    <h4 class="card-text text-center">UIHue&nbsp;- UI color palette generator</h4>
+                    <!-- <h4 class="card-text text-center">UIHue</h4> -->
+                </div>
+                <form id="Form2" action="https://script.google.com/macros/s/AKfycbx2FMT3lQqvUVZKslkfGk4D2I6fMardQ8t_MP2LRDVIqK3_z-YbmwkpsxmgQTDdAEK4/exec" method="POST" onsubmit="storeData()">
+                    <input type="hidden" id="qualityInput" name="qualityInput">
+                    <input type="hidden" id="diversityInput" name="diversityInput">
+                    
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-12 bg-light d-flex justify-content-center">
+                                <button id="ImagesButton1" class="btn btn-outline-primary mb-4" type="button">Generate 生成</button></div></div>
+                        <div id="row1" class="col-12"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-12 bg-light d-flex justify-content-center">
+                                <button id="ImagesButton2" class="btn btn-outline-primary mt-4 mb-4" type="button">Generate more 生成更多</button></div></div>
+                        <div id="row2" class="col-12"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-12 bg-light d-flex justify-content-center">
+                                <button id="ImagesButton3" class="btn btn-outline-primary mt-4 mb-4" type="button">Generate more 生成更多</button></div></div>
+                        <div id="row3" class="col-12"></div>
+                    </div>
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-12 bg-light d-flex justify-content-center">
+                                <button id="ImagesButton4" class="btn btn-outline-primary mt-4 mb-4" type="button">Generate more 生成更多</button></div></div>
+                        <div id="row4" class="col-12"></div>
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-end mt-4">
+                        <button class="btn btn-primary" type="submit">Finish 结束任务</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </main>
+    </div>
+
+
+    <script>
+        function getImagesfromGroup(imageArray, numImages) {
+            const shuffled = imageArray.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, numImages);
+        }
+        function MixedImages(selectedImages1, selectedImages2) {
+            const sets = [];
+            for (let i = 0; i < 8; i += 2) {
+                let set = [
+                    selectedImages1[i], selectedImages1[i + 1],
+                    selectedImages2[i], selectedImages2[i + 1]
+                ].sort(() => 0.5 - Math.random());
+                sets.push(...set);
+            }
+            return sets;
+        }
+        
+        function createFigureElement(index, src) {
+            const colDiv = document.createElement('div');
+            colDiv.className = 'col-md-6 text-center mb-4';
+
+            const figure = document.createElement('figure');
+            figure.className = 'figure d-flex justify-content-center align-items-center';
+
+            const img = document.createElement('img');
+            img.className = 'figure-img img-fluid rounded';
+            img.src = src;
+            img.alt = `Random Image ${src.split('/').pop()}`;
+
+            img.style.maxWidth = '80%';  // Set a maximum width for the image
+            img.style.height = 'auto';  // Maintain the image's aspect ratio  
+
+            const figcaption = document.createElement('figcaption');
+            figcaption.className = 'figure-caption figure-caption-hidden';
+            figcaption.textContent = src.split('/').pop().split('.')[0]; // Use the image filename as the caption
+            
+            
+
+            const captionInput = document.createElement('input');
+            captionInput.type = 'hidden';
+            captionInput.name = 'captions[]';
+            captionInput.value = src.split('/').pop().split('.')[0];
+            
+            figure.appendChild(img);
+            figure.appendChild(figcaption);
+            colDiv.appendChild(figure);
+            colDiv.appendChild(captionInput);
+
+            return colDiv;
+        }
+        function createSurveyGroup(arrayName, id, text, options) {
+            const strPart = arrayName.replace(/\d+$/, '');
+            const numPart = parseInt(arrayName.match(/\d+$/), 10);
+            let newNumber;
+            if (isNaN(numPart)) {
+                newNumber = id;
+            } else {
+                newNumber = numPart + 4 * (id - 1);
+            }
+            
+            let group = `<div class="form-group d-flex align-items-center justify-content-between" >
+                <label style="margin-right: 30px;">${text}</label>
+                <div class="d-flex justify-content-between">`;
+            
+            options.forEach((option, index) => {
+                group += `<div class="form-check form-check-inline"  style="margin-right: 30px;">
+                    <input class="form-check-input" type="radio" name="${strPart}[${newNumber}]" id="${arrayName}_${id}_${index+1}" value="${index+1}" required>
+                    <label class="form-check-label" for="${arrayName}_${id}_${index+1}">${option}</label>
+                </div>`;
+            });
+            group += '</div></div>';
+            return group;
+        }
+
+        function displayImagesGroups(groupId, selectedImages) {
+            document.getElementById('ImagesButton' + groupId).addEventListener('click', function() {
+                const row = document.getElementById('row' + groupId);
+
+                const imageContainerDiv = document.createElement('div');
+                imageContainerDiv.classList.add('bg-light', 'p-5', 'rounded', 'w-100'); // Container for images with styles
+
+                const imageGroupDiv = document.createElement('div');
+                imageGroupDiv.classList.add('d-flex', 'flex-wrap'); // Flexbox container for images
+
+                for (let i = 4 * (groupId - 1); i < 4 * groupId; i++) {
+                    const figureElement = createFigureElement(i, selectedImages[i]);
+                    figureElement.querySelector('.figure').style.display = 'block';
+                    figureElement.classList.add('w-50'); 
+                    imageGroupDiv.appendChild(figureElement);
+                }
+
+                imageContainerDiv.appendChild(imageGroupDiv);
+                row.appendChild(imageContainerDiv);
+
+                const surveyContainerDiv = document.createElement('div');  // Container for survey groups
+                surveyContainerDiv.classList.add('bg-light', 'pb-4', 'px-5', 'rounded', 'mb-4'); 
+
+                const textNode = document.createTextNode('Please rate the quality of images above on a scale of 1-5, with 1 being very poor and 5 being very good. Please provide a score for each image. <br>请为配色方案的质量进行评分，1表示非常差，5表示非常好。请为每张图像打分。');
+                const textContent = textNode.textContent;
+
+                const qualityGroup1 = createSurveyGroup('quality1', groupId, '<br>Quality rating for image 1 (top-left)<br> 图片1（左上）的质量评分', 
+                [1, 2, 3, 4, 5]);
+                const qualityGroup2 = createSurveyGroup('quality2', groupId, 'Quality rating for image 2 (top-right)<br> 图片2（右上）的质量评分', 
+                [1, 2, 3, 4, 5]);
+                const qualityGroup3 = createSurveyGroup('quality3', groupId, 'Quality rating for image 3 (bottom-left)<br> 图片3（左下）的质量评分', 
+                [1, 2, 3, 4, 5]);
+                const qualityGroup4 = createSurveyGroup('quality4', groupId, 'Quality rating for image 4 (bottom-right)<br> 图片4（右下）的质量评分', 
+                [1, 2, 3, 4, 5]);
+                const diversityGroup = createSurveyGroup('diversity', groupId, '<br>Please rate the diversity of the image set above on a scale of 1-5, with 1 being very low diversity and 5 being very high diversity. <br>请为这组图像的多样性进行评分，1表示多样性很低，5表示多样性很高。', 
+                [1, 2, 3, 4, 5]);
+                const trustGroup = createSurveyGroup('trust', groupId, 'Please rate your trust in UIHue on a scale of 1-5, with 1 being very low trust and 5 being very high trust.<br>请为你对UIHue系统的信任度进行评分，1表示非常不信任，5表示非常信任。', 
+                [1, 2, 3, 4, 5]);
+
+                surveyContainerDiv.innerHTML = textContent+qualityGroup1+qualityGroup2+qualityGroup3+qualityGroup4+diversityGroup + trustGroup;
+                row.appendChild(surveyContainerDiv);
+
+                // Hide the current button and show the next button
+                document.getElementById('ImagesButton' + groupId).style.display = 'none';
+                if (document.getElementById('ImagesButton' + (Number(groupId) + 1))) {
+                    document.getElementById('ImagesButton' + (Number(groupId) + 1)).style.display = 'block';
+                }
+                
+                row.scrollIntoView({ behavior: 'smooth', block: 'start'});
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', (event) =>{
+            const urlParams = new URLSearchParams(window.location.search);
+            const quality = urlParams.get('quality');
+            const diversity = urlParams.get('diversity'); 
+            document.getElementById('qualityInput').value = quality;
+            document.getElementById('diversityInput').value = diversity;
+            sessionStorage.setItem('qualityInput_task2', quality);
+            sessionStorage.setItem('diversityInput_task2', diversity);
+
+            const imageCount = 16;
+            const Task = 'B';
+            const baseFolderPath = '/Users/kailin/Desktop/ImagePool/';
+
+            let selectedImages;
+            if (diversity === 'low') {
+                const imageGroup = Math.floor(Math.random() * 8) + 1;;
+                if (quality === 'high' || quality === 'low') {
+                    const TaskGroup = Task + imageGroup + (quality === 'low' ? 'L' : '');
+                    const folderPath = `${baseFolderPath}${TaskGroup}/`;
+                    const images = [];
+                    for (let i = 1; i <= imageCount; i++) {
+                        const imageNumber = i.toString().padStart(2, '0');
+                        images.push(`${folderPath}${TaskGroup}_${imageNumber}.png`);
+                    }
+                    selectedImages = getImagesfromGroup(images, 16);
+                } else if (quality === 'mixed') {  
+                    const TaskGroup1 = Task + imageGroup;
+                    const TaskGroup2 = Task + imageGroup + 'L';
+                    const folderPath1 = `${baseFolderPath}${TaskGroup1}/`;
+                    const folderPath2 = `${baseFolderPath}${TaskGroup2}/`;
+                    const images1 = [];
+                    const images2 = [];
+                    for (let i = 1; i <= imageCount; i++) {
+                        const imageNumber = i.toString().padStart(2, '0');
+                        images1.push(`${folderPath1}${TaskGroup1}_${imageNumber}.png`);
+                        images2.push(`${folderPath2}${TaskGroup2}_${imageNumber}.png`);
+                    }
+                    const selectedImages1 = getImagesfromGroup(images1, 8);
+                    const selectedImages2 = getImagesfromGroup(images2, 8);
+                    selectedImages = MixedImages(selectedImages1, selectedImages2);
+                }
+                console.log(selectedImages); 
+                
+            } else if (diversity === 'high'){
+                const allImages = [];
+                if (quality === 'high' || quality === 'low') {
+                    for (let i = 1; i <= 8; i++) {
+                        const TaskGroup = Task + i + (quality === 'low' ? 'L' : '');
+                        const folderPath = `${baseFolderPath}${TaskGroup}/`;
+                        const images = [];
+                        for (let j = 1; j <= imageCount; j++) {
+                            const imageNumber = j.toString().padStart(2, '0');
+                            images.push(`${folderPath}${TaskGroup}_${imageNumber}.png`);
+                        }
+                        allImages.push(images);
+                    }
+
+
+                    function shuffle(array) {
+                        for (let i = array.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [array[i], array[j]] = [array[j], array[i]];
+                        }
+                        return array;
+                    }
+
+                    function selectImagesFromDifferentGroups(imagesPerGroup, setsCount, imagesPerSet) {
+                        const selectedImages = [];
+                        const shuffledImages = imagesPerGroup.map(group => shuffle([...group])); // Shuffle each group
+
+                        for (let setIndex = 0; setIndex < setsCount; setIndex++) {
+                            const setImages = [];
+                            const usedGroups = new Set();
+
+                            while (setImages.length < imagesPerSet) {
+                                const groupIndex = Math.floor(Math.random() * imagesPerGroup.length);
+
+                                // Ensure we pick from a different group each time within the set
+                                if (!usedGroups.has(groupIndex) && shuffledImages[groupIndex].length > 0) {
+                                    setImages.push(shuffledImages[groupIndex].pop());
+                                    usedGroups.add(groupIndex);
+                                }
+                            }
+                            selectedImages.push(...setImages);
+                        }
+                        return selectedImages;
+                    }
+
+                    // Choose 16 images ensuring each set of 4 comes from different groups
+                    selectedImages = selectImagesFromDifferentGroups(allImages, 4, 4);
+                    console.log(selectedImages);
+
+
+                } else if (quality === 'mixed') {
+                    function collectImages(groupNames) {
+                        return groupNames.map(groupName => {
+                            const folderPath = `${baseFolderPath}${groupName}/`;
+                            const images = [];
+                            for (let j = 1; j <= imageCount; j++) {
+                                const imageNumber = j.toString().padStart(2, '0');
+                                images.push(`${folderPath}${groupName}_${imageNumber}.png`);
+                            }
+                            return images;
+                        });
+                    }  
+                    const allImagesA = collectImages(Array.from({ length: 8 }, (_, i) => Task + (i + 1)));
+                    const allImagesAL = collectImages(Array.from({ length: 8 }, (_, i) => Task + (i + 1) + 'L'));
+                    selectedImages = [];
+                    for (let setIndex = 0; setIndex < 4; setIndex++) {
+                        const setImages = [];
+                        const usedGroupsA = new Set();
+                        const usedGroupsAL = new Set();
+
+                        while (setImages.length < 2) {
+                            const groupIndexA = Math.floor(Math.random() * allImagesA.length);
+                            if (!usedGroupsA.has(groupIndexA) && allImagesA[groupIndexA].length > 0) {
+                                setImages.push(allImagesA[groupIndexA].pop());
+                                usedGroupsA.add(groupIndexA);
+                            }
+                        }
+                        while (setImages.length < 4) {
+                            const groupIndexAL = Math.floor(Math.random() * allImagesAL.length);
+                            if (!usedGroupsAL.has(groupIndexAL) && allImagesAL[groupIndexAL].length > 0) {
+                                setImages.push(allImagesAL[groupIndexAL].pop());
+                                usedGroupsAL.add(groupIndexAL);
+                            }
+                        }
+                        for (let i = setImages.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [setImages[i], setImages[j]] = [setImages[j], setImages[i]];
+                        }
+
+                        selectedImages.push(...setImages);
+                    }
+                    console.log(selectedImages);
+                    
+                } 
+            }
+            
+            // selectedImages = new Array(16).fill('/Users/kailin/Desktop/test/placeholder.png');
+
+            sessionStorage.setItem('images_task2', JSON.stringify(selectedImages));
+            displayImagesGroups('1', selectedImages);
+            displayImagesGroups('2', selectedImages);
+            displayImagesGroups('3', selectedImages);
+            displayImagesGroups('4', selectedImages);
+        });
+
+    </script>
+
+    <script>
+        var countdownTime = 20 * 60;
+        var timerElement = document.getElementById('timer');
+
+        function updateCountdown() {
+            var minutes = Math.floor(countdownTime / 60);
+            var seconds = countdownTime % 60;
+            var formattedTime = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+            timerElement.textContent = formattedTime;
+            countdownTime--;
+            if (countdownTime >= 0) {
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+        updateCountdown();
+    </script>
+
+
+    <script>
+        document.getElementById('Form2').addEventListener('submit', function(event) {
+            var userConfirmed = confirm('Please make sure that you have finished all the design works. The next page is post-study questionnaire.\n\n请确认您已经完成了所有的设计任务，接下来会跳转至问卷。\n');
+            if (!userConfirmed) {
+                event.preventDefault(); // Prevent the form from being submitted
+            }else {
+                setTimeout(function() {
+                    document.getElementById('Form2').submit(); 
+                    window.location.href = 'survey2.html';
+                }, 1000); // Delay in milliseconds
+            }
+        });
+    </script>
+
+    <script>
+        // Store the selected radio button values in sessionStorage
+        function storeData() {
+            function processStorage(namePrefix, storageKey) {
+                const inputs = document.querySelectorAll(`input[name^="${namePrefix}["]:checked`);
+                const values = Array.from(inputs).map(input => input.value);
+                sessionStorage.setItem(storageKey, JSON.stringify(values));
+            }
+            processStorage('quality', 'quality_task2');
+            processStorage('diversity', 'diversity_task2');
+            processStorage('trust', 'trust_task2');
+            
+        }
+    </script>
+
+    
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

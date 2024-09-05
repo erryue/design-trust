@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <header class="text-center mb-4">
+            <h1>Break</h1>
+        </header>
+        <main>
+            <div class="bg-white px-5 rounded">
+                <div class="bg-light p-5 rounded">
+                    <p class="card-text text-left mb-2">Answer the following general questions and have a break as needed!</p>
+                    <p class="card-text text-left">回答下面的问题后，休息一下！</p>
+                    <br>
+
+                    <form id="Form1" action="https://script.google.com/macros/s/AKfycbw2ZRiinjTLYwINLhR1tIzHpo1tzkTOfEGV1G0menZDNwjoUATYUM0TR_4R1cX4fqnt/exec" method="POST">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="gender">What is your gender? </label>
+                                <p>您的性别？</p>
+                                <select id="gender" name="gender" class="form-control" style="max-width: 80%;" required>
+                                    <option value="" disabled selected>Please select&nbsp; 请选择</option>
+                                    <option value="Woman">Woman 女</option>
+                                    <option value="Man">Man 男</option>
+                                    <option value="0">Prefer not to answer 不愿回答</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="age">What is your age?</label>
+                                <p>您的年龄？</p>
+                                <select id="age" name="age" class="form-control" style="max-width: 80%;" required>
+                                    <option value="" disabled selected>Please select&nbsp; 请选择</option>
+                                    <option value="18–24">18–24</option>
+                                    <option value="25–34">25–34</option>
+                                    <option value="35–44">35–44</option>
+                                    <option value="45–54">45–54</option>
+                                    <option value="55–64">55–64</option>
+                                    <option value="65 or older">65 or older 65以上</option>
+                                    <option value="0">Prefer not to answer 不愿回答</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="education">What is your highest education degree?</label>
+                                <p>您的最高学历？</p>
+                                <select id="education" name="education" class="form-control" style="max-width: 100%;" required>
+                                    <option value="" disabled selected>Please select&nbsp; 请选择</option>
+                                    <option value="1">Less than high school 高中以下</option>
+                                    <option value="2">High school diploma 高中</option>
+                                    <option value="3">Bachelor's degree 本科</option>
+                                    <option value="4">Master's degree 硕士</option>
+                                    <option value="5">Doctoral degree 博士</option>
+                                    <option value="0">Prefer not to answer 不愿回答</option>
+                                </select>
+                            </div>      
+                        </div>
+                        <br>
+                        
+                        <!-- New Questions -->
+                        <div class="form-group">
+                            <label for="experience_design">How would you rate your experience with concept design sketch?</label>
+                            <p>您如何评价自己的概念设计草图经验？</p>
+                            <select id="experience_design" name="experience_design" class="form-control" style="max-width: 100%;" required>
+                                <option value="" disabled selected>Please select&nbsp; 请选择</option>
+                                <option value="1">No experience 无经验</option>
+                                <option value="2">Beginner 初学者</option>
+                                <option value="3">Intermediate 中级</option>
+                                <option value="4">Advanced 高级</option>
+                                <option value="5">Expert 专家</option>
+                                <option value="0">Prefer not to answer 不愿回答</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience_ui">How would you rate your experience with UI color matching?</label>
+                            <p>您如何评价自己的UI颜色匹配经验？</p>
+                            <select id="experience_ui" name="experience_ui" class="form-control" style="max-width: 100%;" required>
+                                <option value="" disabled selected>Please select&nbsp; 请选择</option>
+                                <option value="1">No experience 无经验</option>
+                                <option value="2">Beginner 初学者</option>
+                                <option value="3">Intermediate 中级</option>
+                                <option value="4">Advanced 高级</option>
+                                <option value="5">Expert 专家</option>
+                                <option value="0">Prefer not to answer 不愿回答</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="familiarity_ai">How familiar are you with AI-assisted design applications such as DALL·E 3, Midjourney, and Stable diffusion?</label>
+                            <p>您对AI辅助设计应用的熟悉程度如何，例如DALL·E 3、Midjourney和Stable diffusion？</p>
+                            <select id="familiarity_ai" name="familiarity_ai" class="form-control" style="max-width: 100%;" required>
+                                <option value="" disabled selected>Please select&nbsp; 请选择</option>
+                                <option value="1">Not familiar at all, I have never heard of them&nbsp; 完全不熟悉，我从未听说过它们</option>
+                                <option value="2">Slightly familiar, I have heard of them or have some idea of what they are&nbsp; 略微熟悉，我听说过它们</option>
+                                <option value="3">Moderately familiar, I know what they are and can explain&nbsp; 中度熟悉，我知道能解释它们</option>
+                                <option value="4">Very familiar, I have technical knowledge of what they are and how they work&nbsp; 非常熟悉，我对它们的技术有所了解</option>
+                                <option value="5">Extremely familiar, I consider myself an expert on them&nbsp; 极其熟悉，我认为自己是这方面的专家</option>
+                                <option value="0">Prefer not to answer&nbsp; 不愿回答</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="frequency_ai">How often do you use AI-assisted design applications?</label>
+                            <p>您多久使用一次AI辅助设计应用？</p>
+                            <select id="frequency_ai" name="frequency_ai" class="form-control" style="max-width: 100%;" required>
+                                <option value="" disabled selected>Please select&nbsp; 请选择</option>
+                                <option value="1">Never&nbsp;  从不使用</option>
+                                <option value="2">Rarely, about 1–2 times a month&nbsp;  很少使用，每月1-2次</option>
+                                <option value="3">Sometimes, about 3–4 times a month&nbsp;  有时使用，每月3-4次</option>
+                                <option value="4">Often, about twice a week&nbsp;  经常使用，每周2次</option>
+                                <option value="5">Always, about once or more a day&nbsp;  总是使用，每天1次或以上</option>
+                                <option value="0">Prefer not to answer&nbsp;  不愿回答</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="feelings_ai">Overall, how do you feel about AI-assisted design applications?</label>
+                            <p>总体而言，您对AI辅助设计应用的态度如何？</p>
+                            <select id="feelings_ai" name="feelings_ai" class="form-control" style="max-width: 100%;" required>
+                                <option value="" disabled selected>Please select&nbsp; 请选择</option>
+                                <option value="1">Negative 消极</option>
+                                <option value="2">Somewhat negative 有点消极</option>
+                                <option value="3">Neutral 中立</option>
+                                <option value="4">Somewhat positive 有点积极</option>
+                                <option value="5">Positive 积极</option>
+                                <option value="0">Prefer not to answer 不愿回答</option>
+                            </select>
+                        </div>
+                        
+                        <br>
+                        <br>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button class="btn btn-primary" type="submit">Next &nbsp;下一步</button>
+                        </div>
+                    </form>
+                </div>
+                <br>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('Form1').addEventListener('submit', function(event) {
+            setTimeout(function() {
+                window.location.href = 'tutorial2.html';
+            }, 1000);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial1</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <header class="text-center mb-4">
+            <h1>Tutorial</h1>
+        </header>
+        <main>
+            <div class="bg-white px-5 rounded"> 
+                <div class="bg-light p-5 rounded">
+                    <h5 class="text-left">Task 1 overview&nbsp; <span style="font-size: 0.95em;">任务一概述</span></h5>
+                    <p></p>
+                    <p>In this task, you will engage in a creative exercise where you imagine a future concept based on a given theme. Your goal is to generate as many sketches as possible within a limited time and come up with a variety of creative ideas.</p>
+                    <p>在这个任务中，您将参与一项创意练习，围绕指定的主题进行未来概念的设计构思。您的目标是在规定时间内尽可能多地生成草图，提出多样创意。</p>
+                    <!-- <h5 class="text-left">Example</h5> -->
+                    <p></p>
+                    <p>Example: "Design a personal assistant robot in the future."</p>
+                    <p>示例: "设计一个未来的个人助理机器人。"</p>
+                </div>
+            </div>
+            <div class="bg-white pt-4 px-5 rounded" >
+                <div class="bg-light p-5 rounded">
+                    <h5 class="text-left">Carvizio introduction &nbsp;系统介绍</h5>
+                    <br>
+                    <p>Carvizio is an AI-powered image generation system that assists with concept design. 
+                        With Carvizio, you can generate four design images each time, with a maximum of four sessions. In addition to completing the design task, you will also need to score each set of generated results.</p>
+                    <p>Carvizio 是一个 AI 驱动的图像生成系统，可以帮助您进行概念设计。使用 Carvizio，您每次可以生成四张设计图像，最多生成结果四次。除完成设计任务外，您还需要对每组生成的结果打分。</p>
+                    <p>The following image illustrates a detailed example of experimenting with Carvizio.</p>
+                    <p>下图详细展示了使用Carvizio开展实验的示例。</p>
+                    <br>
+                    <div class="bg-light rounded">
+                        <img src="example1.jpeg" class="img-fluid w-100" alt="...">
+                    </div>
+                    <br>
+                    <br>
+                    <p class="card-text text-left mb-2">If you have any questions, feel free contact our experimenter!</p>
+                    <p>如果您有任何问题，请随时联系主试！</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded">
+                <div class="btn-group btn-group-toggle hidden" data-toggle="buttons">
+                    <label class="btn btn-outline-secondary active">
+                        <input type="radio" name="qualityOptions" id="highQuality" value="high" autocomplete="off" checked> High Quality
+                    </label>
+                    <label class="btn btn-outline-secondary">
+                        <input type="radio" name="qualityOptions" id="lowQuality" value="low" autocomplete="off"> Low Quality
+                    </label>
+                    <label class="btn btn-outline-secondary">
+                        <input type="radio" name="qualityOptions" id="mixedQuality" value="mixed" autocomplete="off"> Mixed Quality
+                    </label>
+                </div>
+                <div class="btn-group btn-group-toggle hidden" data-toggle="buttons">
+                    <label class="btn btn-outline-secondary active">
+                        <input type="radio" name="diversityOptions" id="highDiversity" value="high" autocomplete="off" checked> High Diversity
+                    </label>
+                    <label class="btn btn-outline-secondary">
+                        <input type="radio" name="diversityOptions" id="lowDiversity" value="low" autocomplete="off"> Low Diversity
+                    </label>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" onclick="location.href='Task1.html'">Start Task 1 &nbsp;开始任务一</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function getRandomValue(arr) {
+                const randomIndex = Math.floor(Math.random() * arr.length);
+                return arr[randomIndex];
+            }
+            
+            const qualityOptions = ['high', 'low', 'mixed'];
+            const diversityOptions = ['high', 'low'];
+
+            // Randomly select quality and diversity
+            const quality = getRandomValue(qualityOptions);
+            const diversity = getRandomValue(diversityOptions);
+
+            
+            const startButton = document.querySelector('.btn-primary');          
+            startButton.addEventListener('click', function(event) {
+                event.preventDefault(); 
+
+                // 获取用户选择的选项
+                // const quality = document.querySelector('input[name="qualityOptions"]:checked').value;
+                // const diversity = document.querySelector('input[name="diversityOptions"]:checked').value;
+                
+                const baseUrl = 'Task1.html';
+                const queryParams = `?quality=${encodeURIComponent(quality)}&diversity=${encodeURIComponent(diversity)}`;
+                const finalUrl = baseUrl + queryParams;
+                
+                window.location.href = finalUrl;
+            });
+        });
+    </script>
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+</body>
+</html>

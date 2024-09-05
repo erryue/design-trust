@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview2</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px; 
+        }
+        .image-grid img {
+            width: 100%;
+            height: auto; 
+        }
+        .score-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 20px; /* Add space between images and scores */
+            width: 900px; 
+        }
+        .score-container p {
+            margin: 0; /* Remove default margin */
+        }
+        .container-row {
+            display: flex;
+            align-items: start;
+            margin-bottom: 20px; /* Space between rows */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <header class="text-center mb-4">
+            <h1>Interview</h1>
+        </header>
+        <main>
+            <div class="bg-light p-5 rounded">
+                <p class="card-text text-left mb-2">Interview time! Below shows the UIHue’s results during the design process and your ratings.</p>
+                <p class="card-text text-left">访谈时间！下面展示了设计过程中UIHue的系统结果和你的评分。</p>
+                <br><br>
+                <div id="mainContainer"></div>
+            </div>
+            <!-- <div class="text-center">
+                <button class="btn btn-primary mt-5 mb-5" onclick="location.href='break.html'">Finish &nbsp; 感谢参与</button>
+            </div> -->
+        </main>
+    </div>
+
+    <script>
+        const images = JSON.parse(sessionStorage.getItem('images_task2')) || [];
+        const quality = JSON.parse(sessionStorage.getItem('quality_task2')) || [];
+        const diversity = JSON.parse(sessionStorage.getItem('diversity_task2')) || [];
+        const trust = JSON.parse(sessionStorage.getItem('trust_task2')) || [];
+
+        const mainContainer = document.getElementById('mainContainer');
+
+        const imagesPerContainer = 4;
+        const totalContainers = Math.ceil(images.length / imagesPerContainer);
+
+        for (let i = 0; i < totalContainers; i++) {
+            const containerRow = document.createElement('div');
+            containerRow.className = 'container-row';
+
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'image-grid';
+
+            const scoreContainer = document.createElement('div');
+            scoreContainer.className = 'score-container';
+
+            for (let j = 0; j < imagesPerContainer; j++) {
+                const index = i * imagesPerContainer + j;
+
+                if (index < images.length) {
+                    const figure = document.createElement('figure');
+                    const img = document.createElement('img');
+                    img.className = 'figure-img img-fluid rounded';
+                    img.src = images[index];
+                    const caption = document.createElement('figcaption');
+                    caption.textContent =  `Quality score: ${quality[index] || 'N/A'}`;
+
+                    figure.appendChild(img);
+                    figure.appendChild(caption);
+
+                    imageContainer.appendChild(figure);
+
+                    if (j === imagesPerContainer - 1) {
+                        const div = document.createElement('div');
+                        div.innerHTML = `
+                            <p>Diversity score: ${diversity[i] || 'N/A'}</p>
+                            <p>Trust score: ${trust[i] || 'N/A'}</p>
+                        `;
+                        scoreContainer.appendChild(div);
+                    }
+                }
+            }
+
+            containerRow.appendChild(imageContainer);
+            containerRow.appendChild(scoreContainer);
+            mainContainer.appendChild(containerRow);
+        }
+    </script>
+
+</body>
+</html>
