@@ -288,7 +288,6 @@
 
                             while (setImages.length < imagesPerSet) {
                                 const groupIndex = Math.floor(Math.random() * imagesPerGroup.length);
-
                                 // Ensure we pick from a different group each time within the set
                                 if (!usedGroups.has(groupIndex) && shuffledImages[groupIndex].length > 0) {
                                     setImages.push(shuffledImages[groupIndex].pop());
@@ -328,14 +327,16 @@
                         while (setImages.length < 2) {
                             const groupIndexA = Math.floor(Math.random() * allImagesA.length);
                             if (!usedGroupsA.has(groupIndexA) && allImagesA[groupIndexA].length > 0) {
-                                setImages.push(allImagesA[groupIndexA].pop());
+                                const randomImageIndex = Math.floor(Math.random() * allImagesA[groupIndexA].length);
+                                setImages.push(allImagesA[groupIndexA].splice(randomImageIndex, 1)[0]);
                                 usedGroupsA.add(groupIndexA);
                             }
                         }
                         while (setImages.length < 4) {
                             const groupIndexAL = Math.floor(Math.random() * allImagesAL.length);
                             if (!usedGroupsAL.has(groupIndexAL) && allImagesAL[groupIndexAL].length > 0) {
-                                setImages.push(allImagesAL[groupIndexAL].pop());
+                                const randomImageIndex = Math.floor(Math.random() * allImagesAL[groupIndexAL].length);
+                                setImages.push(allImagesAL[groupIndexAL].splice(randomImageIndex, 1)[0]);
                                 usedGroupsAL.add(groupIndexAL);
                             }
                         }
