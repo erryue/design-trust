@@ -36,8 +36,8 @@
                     <h5 class="card-title text-left mb-4">Design task&nbsp; <span style="font-size: 0.95em;">设计任务</span></h5>
                     <p class="card-text text-left mb-2">Design <span class="font-weight-bold">ONE</span> visually appealing and functional color palette for the specified UI template. UIHue system below could design color schemes to assist your design. </p>
                     <p class="card-text text-left">为指定的 UI 模板设计「一种」美观实用的配色方案。UIHue系统可以生成配色方案以辅助您的设计。</p>
-                    <p class="card-text text-left mb-2">Complete your sketches on the iPad.</p>
-                    <p class="card-text text-left">在iPad画板上完成您的草图。</p>
+                    <p class="card-text text-left mb-2">Complete your color schemes on the iPad.</p>
+                    <p class="card-text text-left">在iPad画板上完成您的配色方案。</p>
                 </div>
                 <br>
                 <br>
@@ -196,7 +196,7 @@
                 [1, 2, 3, 4, 5]);
                 const diversityGroup = createSurveyGroup('diversity', groupId, '<br>Please rate the diversity of the image set above on a scale of 1-5, with 1 being very low diversity and 5 being very high diversity. <br>请为这组图像的多样性进行评分，1表示多样性很低，5表示多样性很高。', 
                 [1, 2, 3, 4, 5]);
-                const trustGroup = createSurveyGroup('trust', groupId, 'Please rate your trust in UIHue on a scale of 1-5, with 1 being very low trust and 5 being very high trust.<br>请为你对UIHue系统的信任度进行评分，1表示非常不信任，5表示非常信任。', 
+                const trustGroup = createSurveyGroup('trust', groupId, 'How much will you trust the AI system, UIHue, in assisting you with color scheme designs? Please rate your trust in UIHue on a scale of 1-5, with 1 being very low trust and 5 being very high trust.<br>您是否信任UIHue系统辅助您完成配色方案设计？请为您对UIHue系统的信任度进行评分，1表示非常不信任，5表示非常信任。', 
                 [1, 2, 3, 4, 5]);
 
                 surveyContainerDiv.innerHTML = textContent+qualityGroup1+qualityGroup2+qualityGroup3+qualityGroup4+diversityGroup + trustGroup;
